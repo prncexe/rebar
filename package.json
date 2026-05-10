@@ -1,10 +1,10 @@
 {
-  "name": "first-cli-tool",
+  "name": "rebar",
   "bin": {
-    "project": "./bin/project.js"
+    "rebar": "./bin/project.js"
   },
   "version": "1.0.0",
-  "description": "A minimal Node.js CLI tool",
+  "description": "Interactive CLI for scaffolding JavaScript and TypeScript projects across multiple frameworks.",
   "main": "./src/index.ts",
   "type": "module",
   "scripts": {
