@@ -1,6 +1,5 @@
 import type { pkgmanager } from "@/types/common";
 import { checkbox } from "@inquirer/prompts";
-
 export const expressPrompts = async (manager:pkgmanager) => {
   return await checkbox({
     message: "select tools to add",
@@ -19,6 +18,10 @@ export const expressPrompts = async (manager:pkgmanager) => {
         name: 'Eslint?',
         value:'eslint'
       },
+      {
+        name: 'Path Aliasing (@/*)',
+        value: 'pathAliasing'
+      }
       
     ]
   })

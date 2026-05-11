@@ -1,6 +1,6 @@
 import type { language, pkgmanager } from "@/types/common"
 import { execSync } from "child_process"
-import fs,{ mkdirSync ,unlinkSync,writeFileSync,readFileSync} from "fs"
+import fs,{ mkdirSync ,existsSync,unlinkSync,writeFileSync,readFileSync} from "fs"
 import path from  "path"
 import { gitignore } from "@/constants/common"
 
@@ -23,7 +23,10 @@ export const changeDir = (name:string) => {
   process.chdir(path.resolve(name))
 }
 export const removeFile = (name: string) => {
+  if (existsSync(name)) {
   unlinkSync(name)
+    
+  }
 }
 export const addPackage = (manager: pkgmanager,packageName:string) => {
   const command = manager === 'npm' ? `npm i ${packageName}` : `${manager} add ${packageName}`

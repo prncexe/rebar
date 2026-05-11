@@ -2,7 +2,7 @@ import {type pkgmanager } from "@/types/common"
 import { writeFile } from "fs/promises";
 import { writeFileSync } from "fs";
 import { eslint as expressEslintConfig } from "@/constants/express";
-import { addDevPackage, moduleExecutor, addScripts, removeFile } from "./common";
+import { addDevPackage, moduleExecutor, addScripts, removeFile, pathAliasingConfig } from "./common";
 import { expressBoilerplate, tsconfig } from "@/constants/express";
 import { initializeProject } from "./common";
 import { addPackage } from "./common";
@@ -14,7 +14,7 @@ export const expressServer = async ({ manager, ts }: { manager: pkgmanager, ts: 
   addPackage(manager, 'express')
   createRepo("src")
   if (ts) {
-    addDevPackage(manager, "typescript ts-node nodemon @types/node @types/express")
+    addDevPackage(manager, "typescript tsx nodemon @types/node @types/express")
     moduleExecutor(manager,"tsc --init")
     await writeFile("src/index.ts", expressBoilerplate("ts"))
     await writeFile("tsconfig.json", tsconfig)
@@ -39,7 +39,7 @@ export const addDevScripts = (ts:boolean,runtime:string) => {
             },
             {
               key: "dev",
-              command: "ts-node src/index.ts",
+              command: "tsx src/index.ts",
             }
     )
   }
@@ -78,4 +78,16 @@ export const addEslint = ({eslint,ts,manager}:{eslint:boolean,ts:boolean,manager
     }
   )
   addScripts(scripts)
+}
+
+export const expressPathAliasing = ({ ts, pathAliasing }:{ ts: boolean, pathAliasing: boolean }) => {
+  if(!pathAliasing) {
+    return 
+  }
+  if (ts) {
+    pathAliasingConfig("tsconfig.json",'ts')
+  }
+  else {
+    pathAliasingConfig("jsconfig.json",'js')
+  }
 }
