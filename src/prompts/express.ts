@@ -1,7 +1,10 @@
 import type { pkgmanager } from "@/types/common";
 import { checkbox } from "@inquirer/prompts";
-export const expressPrompts = async (manager:pkgmanager) => {
-  return await checkbox({
+
+export type ExpressChoice = "typescript" | "git" | "eslint" | "pathAliasing";
+
+export const expressPrompts = async (manager: pkgmanager): Promise<readonly ExpressChoice[]> => {
+  return await checkbox<ExpressChoice>({
     message: "select tools to add",
     choices: [
       {
@@ -12,18 +15,16 @@ export const expressPrompts = async (manager:pkgmanager) => {
       },
       {
         name: 'git?',
-        value:'git'
+        value: 'git'
       },
       {
         name: 'Eslint?',
-        value:'eslint'
+        value: 'eslint'
       },
       {
         name: 'Path Aliasing (@/*)',
         value: 'pathAliasing'
       }
-      
     ]
   })
-  
 }
