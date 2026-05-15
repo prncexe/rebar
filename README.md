@@ -1,32 +1,144 @@
-  1. init command with templates
-     Support react, next, expo, electron, node, react-native.
-     Example: project init my-app --template next
-  2. Package manager selection
-     Let users choose npm, pnpm, yarn, or bun.
-     Example: --pm pnpm
-  3. Feature flags during bootstrap
-     Match the README intent with options like --typescript, --tailwind, --shadcn, --eslint, --prettier.
-  4. Git setup
-     Add --git to run git init, create .gitignore, and optionally make the first commit.
-  5. Interactive mode
-     If the user runs just project init, prompt for framework, package manager, and tooling instead of forcing flags.
-  6. Presets
-     Add saved combos like:
-     project init my-app --preset next-saas
-     project init my-app --preset expo-mobile
-  7. Post-create automation
-     Optionally install deps and start the app.
-     Example: --install, --run
-  8. Validation and better errors
-     Check if target folder exists, if required CLIs are available, and show actionable fixes instead of raw failures.
-  9. Config file support
-     Allow teams to define defaults in something like project.config.json.
-  10. add command for existing projects
-     This is especially useful:
-     project add tailwind
-     project add shadcn
-     project add typescript
-  11. doctor command
-     Check environment readiness for Node, Git, Expo, Android/iOS tooling, etc.
-  12. list command
-     Show supported templates, presets, and add-ons.
+<p align="center">
+  <strong>Interactive project scaffolding for modern JavaScript & TypeScript frameworks.</strong>
+</p>
+
+<p align="center">
+  <a href="#features"><img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fanomalyco%2Frebar%2Fmain%2Fpackage.json&query=%24.version&style=flat&label=version&color=6c5ce7" alt="Version"></a>
+  <img src="https://img.shields.io/badge/license-ISC-6c5ce7?style=flat" alt="License">
+  <img src="https://img.shields.io/badge/node-%3E%3D20-6c5ce7?style=flat" alt="Node">
+  <img src="https://img.shields.io/badge/typescript-5.9-3178C6?style=flat" alt="TypeScript">
+</p>
+
+<br>
+
+## Overview
+
+Rebar is an interactive CLI that scaffolds full-featured projects across **Next.js**, **Vite**, **Express**, **Expo**, and **Electron**. Answer a few prompts and get a production-ready project with your choice of package manager, linter, database ORM, auth, and UI toolkit — all wired up and ready to code.
+
+<br>
+
+## Features
+
+- **Framework selection** — Next.js, Vite (React), Express, Expo, or Electron
+- **Package manager of choice** — npm, yarn, or bun
+- **Per-framework tooling prompts** — TypeScript, Tailwind CSS, shadcn/ui, tRPC, Drizzle ORM, Better Auth, React Router, React Compiler, Husky, ESLint, Biome, path aliasing, and more
+- **Interactive & headless modes** — `rebar init` for guided setup, `rebar start` for flag-driven automation
+- **Colored terminal output** — step indicators, status symbols, and a welcome banner
+- **Pinned dependency versions** — all packages are locked to stable releases so scaffolding doesn't break
+
+<br>
+
+## Quick start
+
+```bash
+npx rebar init
+```
+
+Follow the prompts to pick a package manager, framework, and extra tooling. That's it.
+
+<br>
+
+## Installation
+
+Install globally (optional):
+
+```bash
+npm install -g rebar
+# or
+yarn global add rebar
+# or
+bun add -g rebar
+```
+
+Then run from anywhere:
+
+```bash
+rebar init
+```
+
+<br>
+
+## Usage
+
+### Interactive mode
+
+```bash
+rebar init
+```
+
+Walks you through:
+
+1. **Package manager** — choose npm, yarn, or bun
+2. **Framework** — pick Next.js, Vite, Express, Expo, or Electron
+3. **Project name** — enter your project name
+4. **Extra tooling** — select optional tools (varies by framework)
+
+### Headless mode
+
+```bash
+rebar start -m npm -f vite
+```
+
+Flags:
+
+| Flag | Description |
+|------|-------------|
+| `-m, --packageManager <name>` | Package manager: `npm`, `yarn`, `bun` |
+| `-f, --framework <name>` | Framework: `nextjs`, `vite`, `express`, `expo`, `electron` |
+
+<br>
+
+## Supported frameworks
+
+| Framework | Prompts |
+|-----------|---------|
+| **Next.js** | React Compiler, shadcn/ui, tRPC, Drizzle ORM, Better Auth, Husky, ESLint / Biome |
+| **Vite (React)** | TypeScript, Tailwind CSS, shadcn/ui, React Compiler, React Router, path aliasing |
+| **Express** | TypeScript, Git, ESLint, path aliasing |
+| **Expo** | Interactive `create-expo-app` (passthrough) |
+| **Electron** | Electron Forge / Electron Vite (passthrough) |
+
+<br>
+
+## Requirements
+
+- **Node.js** >= 20
+- **npm**, **yarn**, or **bun** (depending on your preference)
+- **Git** (for Express `git` option)
+
+<br>
+
+## Development
+
+```bash
+# Clone
+git clone https://github.com/anomalyco/rebar.git
+cd rebar
+
+# Install dependencies
+npm install
+
+# Type-check
+npm run typecheck
+
+# Lint
+npm run lint
+```
+
+Run the CLI locally:
+
+```bash
+node bin/project.js init
+```
+
+<br>
+
+## Why "Rebar"?
+
+Rebar is the steel reinforcing bar that gives concrete its tensile strength — it's hidden inside the structure, but everything relies on it. A solid scaffolding tool works the same way.
+
+<br>
+
+## License
+
+ISC
