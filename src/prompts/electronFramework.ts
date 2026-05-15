@@ -1,16 +1,19 @@
 import { select } from "@inquirer/prompts";
-export const electronFramework = async():Promise<'electron forge' | 'electron vite'> => {
- return  await select({
-    message: 'choose a build tool',
+import { colors } from "@/utils/display";
+export const electronFramework = async (): Promise<'electron forge' | 'electron vite'> => {
+  return await select({
+    message: `${colors.cyan('\u276F')} Pick a build tool for Electron`,
     choices: [
       {
-        name:'electron forge',
-        value:'electron forge'
+        name: 'Electron Forge',
+        value: 'electron forge',
+        description: 'Official all-in-one toolchain for Electron',
       },
       {
-        name:'electron vite',
-        value:'electron vite'
-      }
-    ]
-  })
-}
+        name: 'Electron Vite',
+        value: 'electron vite',
+        description: 'Fast HMR with Vite for Electron',
+      },
+    ],
+  });
+};

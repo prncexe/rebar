@@ -1,62 +1,73 @@
-import type { framework,pkgmanager } from "@/types/common";
-import { select,input } from "@inquirer/prompts";
-export async function choosePackageManager():Promise<pkgmanager>{
- return await select({
-    message: 'Select a package manager',
+import type { framework, pkgmanager } from "@/types/common";
+import { select, input } from "@inquirer/prompts";
+import { colors } from "@/utils/display";
+export async function choosePackageManager(): Promise<pkgmanager> {
+  return await select({
+    message: `${colors.cyan('\u276F')} Pick a package manager`,
     choices: [
       {
         name: 'npm',
         value: 'npm',
+        description: 'Node package manager',
       },
       {
         name: 'yarn',
         value: 'yarn',
+        description: 'Fast, reliable, and secure dependency management',
       },
       {
         name: 'bun',
         value: 'bun',
+        description: 'All-in-one JavaScript runtime & package manager',
       },
       {
         name: 'pnpm',
         value: 'pnpm',
+        description: 'Fast, disk-space efficient package manager',
       },
     ],
   });
 }
 
-export async function chooseFramework(manager:pkgmanager):Promise<framework> {
+export async function chooseFramework(manager: pkgmanager): Promise<framework> {
   return await select({
-    message: 'Select a framework',
+    message: `${colors.cyan('\u276F')} Pick a framework`,
     choices: [
       {
-        name: 'nextjs',
+        name: 'Next.js',
         value: 'nextjs',
-        disabled: manager === 'pnpm'? "(not allowed with pnpm, throws pnpm approve builds error)" : false,
-
+        description: 'React framework with SSR, app router, and more',
+        disabled: manager === 'pnpm' ? "(not recommended with pnpm)" : false,
       },
       {
-        name: 'vite(React)',
-        value:'vite',
+        name: 'Vite (React)',
+        value: 'vite',
+        description: 'Lightning-fast React SPA with Vite',
       },
       {
-        name: 'express',
-        value:'express',
+        name: 'Express',
+        value: 'express',
+        description: 'Minimalist Node.js backend framework',
       },
       {
-        name:'expo',
-        value:'expo',
+        name: 'Expo',
+        value: 'expo',
+        description: 'Universal React Native apps for iOS, Android, and web',
       },
       {
-        name:'electron',
+        name: 'Electron',
         value: 'electron',
-        disabled: manager === 'bun'? "(Not supported with bun)" : false,
-      }
-    ]
-  })
-  
+        description: 'Desktop apps with web technologies',
+        disabled: manager === 'bun' ? "(not supported with bun)" : false,
+      },
+    ],
+  });
 }
 
-export async function typeProjectName(): Promise<string>{
- const str =  await input({ message: 'Enter your Project name' });
-  return str.trim();
+export async function typeProjectName(): Promise<string> {
+  const str = await input({
+    message: `${colors.cyan('\u276F')} Project name`,
+    default: 'my-app',
+  });
+  return str.trim() || 'my-app';
 }
