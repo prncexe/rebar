@@ -6,7 +6,9 @@ import { reactRouterEntry, viteAppTsconfig } from "@/constants/vite"
 
 export const initiateVite = ({ manager, ts, name }: { manager: pkgmanager, ts: boolean, name: string }) => { 
  const template = ts ? "react-ts" : "react"
- const command = `${manager} create vite ${name} --template ${template} --no-interactive`
+ const command = manager === "npm"
+   ? `npm create vite@latest ${name} -- --template ${template} --no-interactive`
+   : `${manager} create vite@latest ${name} --template ${template} --no-interactive`
  execSync(command, {
   stdio:'inherit'
  })
@@ -105,7 +107,7 @@ export const reactCompilerSetup = (manager: pkgmanager,rc:boolean) => {
   if (!rc) {
     return
   }
-  addDevPackage(manager, "@rolldown/plugin-babel@0.2.0 @babel/core@7.27.1 babel-plugin-react-compiler@19.1.0 @types/babel__core@7.20.5");
+  addDevPackage(manager, "@rolldown/plugin-babel@0.2.3 @babel/core@7.29.0 babel-plugin-react-compiler@1.0.0 @types/babel__core@7.20.5");
   
 }
 
@@ -113,8 +115,8 @@ export const shadcnSetup = (shadcn: boolean,manager:pkgmanager) => {
   if (!shadcn) {
     return
   }
-  const initCommand = `${manager === "bun" ? "--bun " : ""}shadcn@latest init -d`
-  const addCommand = `${manager === "bun" ? "--bun " : ""}shadcn@latest add --all`
+  const initCommand = `${manager === "bun" ? "--bun " : ""}shadcn@latest init -y -d`
+  const addCommand = `${manager === "bun" ? "--bun " : ""}shadcn@latest add --all -y`
   packageExecutor(manager,initCommand)
   packageExecutor(manager,addCommand)
 }
