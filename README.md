@@ -40,7 +40,13 @@ Follow the prompts to pick a package manager, framework, and extra tooling. That
 
 ## Installation
 
-Install globally (optional):
+### Via npx (no install)
+
+```bash
+npx rebar init
+```
+
+### Global install
 
 ```bash
 npm install -g rebar
@@ -50,7 +56,7 @@ yarn global add rebar
 bun add -g rebar
 ```
 
-Then run from anywhere:
+Then run:
 
 ```bash
 rebar init

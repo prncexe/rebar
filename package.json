@@ -1,24 +1,49 @@
 {
   "name": "rebar",
+  "version": "1.0.0",
+  "description": "Interactive CLI for scaffolding JavaScript and TypeScript projects across multiple frameworks.",
   "bin": {
     "rebar": "./bin/project.js"
   },
-  "version": "1.0.0",
-  "description": "Interactive CLI for scaffolding JavaScript and TypeScript projects across multiple frameworks.",
-  "main": "./src/index.ts",
+  "files": [
+    "bin/",
+    "src/",
+    "tsconfig.json"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anomalyco/rebar.git"
+  },
+  "bugs": {
+    "url": "https://github.com/anomalyco/rebar/issues"
+  },
+  "homepage": "https://github.com/anomalyco/rebar#readme",
+  "keywords": [
+    "scaffold",
+    "cli",
+    "nextjs",
+    "vite",
+    "express",
+    "expo",
+    "electron",
+    "typescript"
+  ],
+  "author": "",
+  "license": "ISC",
   "type": "module",
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "prepublishOnly": "npm run typecheck && npm run lint"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "@inquirer/prompts": "^8.4.2",
-    "commander": "^14.0.3"
+    "commander": "^14.0.3",
+    "tsx": "^4.21.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -26,7 +51,6 @@
     "eslint": "^10.3.0",
     "globals": "^17.6.0",
     "jiti": "^2.7.0",
-    "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.59.2"
   }
