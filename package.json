@@ -7,20 +7,19 @@
   },
   "files": [
     "bin/",
-    "src/",
-    "tsconfig.json"
+    "dist/"
   ],
   "engines": {
     "node": ">=20"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/anomalyco/rebar.git"
+    "url": "git+https://github.com/prncexe/rebar.git"
   },
   "bugs": {
-    "url": "https://github.com/anomalyco/rebar/issues"
+    "url": "https://github.com/prncexe/rebar/issues"
   },
-  "homepage": "https://github.com/anomalyco/rebar#readme",
+  "homepage": "https://github.com/prncexe/rebar#readme",
   "keywords": [
     "scaffold",
     "cli",
@@ -35,15 +34,16 @@
   "license": "ISC",
   "type": "module",
   "scripts": {
+    "build": "tsup src/index.ts --format esm --out-dir dist --clean",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "prepublishOnly": "npm run typecheck && npm run lint"
+    "dev": "tsx src/index.ts",
+    "prepublishOnly": "npm run build && npm run typecheck && npm run lint"
   },
   "dependencies": {
     "@inquirer/prompts": "^8.4.2",
-    "commander": "^14.0.3",
-    "tsx": "^4.21.0"
+    "commander": "^14.0.3"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -51,6 +51,8 @@
     "eslint": "^10.3.0",
     "globals": "^17.6.0",
     "jiti": "^2.7.0",
+    "tsx": "^4.21.0",
+    "tsup": "^8.5.1",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.59.2"
   }
