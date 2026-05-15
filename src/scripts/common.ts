@@ -51,8 +51,8 @@ export const addDevPackage = (manager: pkgmanager,packageName:string) => {
 export const packageExecutor = (manager: pkgmanager, pkg: string) => {
   const exeMap:Record<pkgmanager,string> = {
     npm: 'npx',
-    pnpm: 'pnpm dlx',
-    yarn: 'yarn dlx',
+    pnpm: 'npx',
+    yarn: 'npx',
     bun: 'bunx'
   }
   const executor = exeMap[manager]
@@ -64,8 +64,8 @@ export const packageExecutor = (manager: pkgmanager, pkg: string) => {
 export const moduleExecutor = (manager: pkgmanager, command: string) => {
   const exeMap:Record<pkgmanager,string> = {
     npm: 'npx',
-    pnpm: 'pnpm exec',
-    yarn: 'yarn exec',
+    pnpm: 'npx',
+    yarn: 'npx',
     bun: 'bunx'
   }
   const executor = exeMap[manager]

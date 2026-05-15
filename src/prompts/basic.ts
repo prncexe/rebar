@@ -31,6 +31,8 @@ export async function chooseFramework(manager:pkgmanager):Promise<framework> {
       {
         name: 'nextjs',
         value: 'nextjs',
+        disabled: manager === 'pnpm'? "(not allowed with pnpm, throws pnpm approve builds error)" : false,
+
       },
       {
         name: 'vite(React)',
