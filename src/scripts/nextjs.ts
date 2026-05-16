@@ -213,7 +213,7 @@ export { handler as GET, handler as POST }`,
 
 export const drizzleSetup = (manager: pkgmanager, drizzle: boolean) => {
   if (!drizzle) return;
-  addPackage(manager, "drizzle-orm@0.45.2 pg@9.6.0");
+  addPackage(manager, "drizzle-orm@0.45.2 pg@8.14.1");
   addDevPackage(manager, "drizzle-kit@0.31.10 tsx@4.21.0 @types/pg@latest");
   appendFileSync(".env", "DATABASE_URL=\n");
   writeData(
